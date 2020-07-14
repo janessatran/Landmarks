@@ -18,6 +18,12 @@ struct LandmarkRow: View {
                 .frame(width: 50, height: 50)
             Text(landmark.name)
             Spacer()
+
+            if landmark.isFavorite {
+                Image(systemName: "star.fill")
+               .imageScale(.medium)
+               .foregroundColor(.yellow)
+            }
         }
     }
 }
@@ -27,8 +33,8 @@ struct LandmarkRow_Previews: PreviewProvider {
     static var previews: some View {
         // You can use a Group to return multiple previews from a preview provider. They will get rendered as separate views in the canvas.
         Group {
-            LandmarkRow(landmark: landmarkData[0])
-            LandmarkRow(landmark: landmarkData[1])
+            LandmarkRow(landmark: landmarkData[3])
+            LandmarkRow(landmark: landmarkData[4])
         }
         .previewLayout(.fixed(width: 300, height: 70)) // this modifier sets a size that approximates a row in the list for the preview
 

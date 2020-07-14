@@ -1,17 +1,13 @@
-//
-//  Landmark.swift
-//  Landmarks
-//
-//  Created by Janessa Tran on 7/13/20.
-//  Copyright © 2020 Janessa Tran. All rights reserved.
-//
+/*
+See LICENSE folder for this sample’s licensing information.
+
+Abstract:
+The model for an individual landmark.
+*/
 
 import SwiftUI
 import CoreLocation
 
-
-// We make Landmark conform to Identifiable so we can pass the data in a SwiftUI List.
-// Since the Landmark type already has the id property required, we don't need anything else.
 struct Landmark: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
@@ -20,6 +16,7 @@ struct Landmark: Hashable, Codable, Identifiable {
     var state: String
     var park: String
     var category: Category
+    var isFavorite: Bool
 
     var locationCoordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(
@@ -31,6 +28,7 @@ struct Landmark: Hashable, Codable, Identifiable {
         case featured = "Featured"
         case lakes = "Lakes"
         case rivers = "Rivers"
+        case mountains = "Mountains"
     }
 }
 

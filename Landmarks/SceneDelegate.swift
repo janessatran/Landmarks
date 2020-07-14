@@ -20,10 +20,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
 
-        // Use a UIHostingController as window root view controller.
+        // Use UserData object from environment to load LandmarkList
+
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: LandmarkList())
+            window.rootViewController = UIHostingController(
+                rootView: LandmarkList()
+                    .environmentObject(UserData()) // You apply this modifier so that views further down in the view hierarchy can read data objects passed down through the environment.
+
+            )
             self.window = window
             window.makeKeyAndVisible()
         }

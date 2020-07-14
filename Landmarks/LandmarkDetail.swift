@@ -10,7 +10,11 @@ import SwiftUI
 
 // Describes the view's content and layout
 struct LandmarkDetail: View {
+    @EnvironmentObject var userData: UserData
     var landmark: Landmark
+    var landmarkIndex: Int {
+           userData.landmarks.firstIndex(where: { $0.id == landmark.id })!
+   }
 
     var body: some View {
         VStack {
@@ -23,10 +27,24 @@ struct LandmarkDetail: View {
                 .offset(y: -130)
                 .padding(.bottom, -130)
             VStack(alignment: .leading) {
+                HStack {
                 Text(landmark.name)
                     // These methods are called modifiers
                     // Modifiers wrap a view to change its display or other properties
                     .font(.title)
+
+                Button(action: {
+                    self.userData.landmarks[self.landmarkIndex].isFavorite.toggle()
+                }) {
+                    if self.userData.landmarks[self.landmarkIndex].isFavorite {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(Color.yellow)
+                    } else {
+                        Image(systemName: "star")
+                            .foregroundColor(Color.gray)
+                    }
+                }
+                }
                 HStack {
                     Text(landmark.park)
                         .font(.subheadline)
@@ -48,6 +66,8 @@ struct LandmarkDetail: View {
 // Declares a preview for the view
 struct LandmarkDetail_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkDetail(landmark: landmarkData[1])
+        LandmarkDetail(landmark: landmarkData[0])
+        .environmentObject(UserData())
+
     }
 }
